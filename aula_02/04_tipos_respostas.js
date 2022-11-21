@@ -27,6 +27,27 @@ bot.start(async ctx => {
         + ' `formas` ```possíveis```'
         + ' [Google](http://www.google.com)'
     );
+
+    // respondendo com imagens "remotas"
+    await ctx.replyWithPhoto({
+        url: "https://www.gstatic.com/webp/gallery/1.jpg"
+    });
+
+    // respondendo com imagem local
+    await ctx.replyWithPhoto({
+        source: `${__dirname}/wallpaper.jpg`,
+    });
+
+    // respondendo com imagens "remotas"
+    await ctx.replyWithPhoto({
+        url: "https://www.gstatic.com/webp/gallery/1.jpg",
+        caption: "Saca só essa imagem"
+    });
+
+    // respondendo com vídeos "remotos"
+    await ctx.replyWithVideo({
+        url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    });
 });
 
 // Iniciando o "polling" com o servidor para verificar se há
