@@ -25,13 +25,18 @@ bot.start(async ctx => {
     const name = ctx.update.message.from.first_name;
     await ctx.reply(`Seja bem vindo ${name}!`);
     await ctx.reply("Por favor, escreva os itens que deseja adicionar...\n");
-    ctx.session.lista = [];
+    ctx.session.list = [];
 });
 
 bot.on("text", (ctx, next) => {
     let item = ctx.update.message.text;
-    ctx.session.lista.push(item);
-    ctx.reply(`O item ${item} foi adicionado à sua lista!`, itemButtons(ctx.session.lista));
+    ctx.session.list.push(item);
+    ctx.reply(`O item ${item} foi adicionado à sua lista!`, itemButtons(ctx.session.list));
+});
+
+bot.action(/remove (.+)/, ctx => {
+    ctx.session.list = ctx.session.list.filter(item => item !== ctx.match[1]);
+    ctx.reply(`${ctx.match[1]} removido da lista!`, itemButtons(ctx.session.list));
 });
 
 bot.startPolling();
